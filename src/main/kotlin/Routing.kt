@@ -30,9 +30,12 @@ fun Application.configureRouting() {
             call.respondText(text = "500: $cause" , status = HttpStatusCode.InternalServerError)
         }
     }
+
+    val greetingService: GreetingService by dependencies
+
     routing {
         get("/") {
-            call.respondText("Hello World!")
+            call.respondText(greetingService.sayHello())
         }
         // Static plugin. Try to access `/static/index.html`
         staticResources("/static", "static")

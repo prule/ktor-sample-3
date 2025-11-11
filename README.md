@@ -50,3 +50,42 @@ If the server starts successfully, you'll see the following output:
 2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
 ```
 
+# Dependency injection
+
+In Application.kt the application defines the production dependencies and then loads the other modules:
+
+```kotlin
+fun Application.module() {
+    dependencies {
+        provide {
+            ProductionGreetingService() as GreetingService
+        }
+    }
+    module2()
+}
+```
+
+In ApplicationTest.kt the test defines a MockGreetingService and loads the other modules:
+
+```kotlin
+   @Test
+    fun testRoot() = testApplication {
+        application {
+            dependencies {
+                provide { MockGreetingService() as GreetingService }
+            }
+            module2()
+        }
+        client.get("/").apply {
+            assertEquals(HttpStatusCode.OK, status)
+            assertEquals(MockGreetingService.GREETING, bodyAsText())
+
+            val message = this.bodyAsText()
+            println(message)
+        }
+    }
+```
+
+The application could be configured with the required implementations via application.kt if needed.
+
+See https://ktor.io/docs/server-dependency-injection.html for more information.
