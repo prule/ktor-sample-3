@@ -17,6 +17,22 @@ fun Application.module() {
 }
 
 fun Application.module2() {
+
+    // Implementation is specified in application.yaml
+    //    ktor:
+    //      application:
+    //        dependencies:
+    //          - com.example.SampleRepository1
+    //          - com.example.Service1
+    val sampleRepository: SampleRepository by dependencies
+    println("sampleRepository is ${sampleRepository.javaClass.simpleName}")
+
+
+    // service1 gets automatically injected with its repository via dependencies
+    val service1: Service1 by dependencies
+    println("Service1.sampleRepository is ${service1.repository.javaClass.simpleName}")
+
+
     configureHTTP()
     configureSecurity()
     configureFrameworks()
