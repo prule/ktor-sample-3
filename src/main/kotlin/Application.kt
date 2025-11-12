@@ -13,7 +13,6 @@ fun Application.module() {
             ProductionGreetingService() as GreetingService
         }
     }
-    module2()
 }
 
 fun Application.module2() {
@@ -24,8 +23,8 @@ fun Application.module2() {
     //        dependencies:
     //          - com.example.SampleRepository1
     //          - com.example.Service1
-    val sampleRepository: SampleRepository by dependencies
-    println("sampleRepository is ${sampleRepository.javaClass.simpleName}")
+//    val sampleRepository: SampleRepository by dependencies
+//    println("sampleRepository is ${sampleRepository.javaClass.simpleName}")
 
 
     // service1 gets automatically injected with its repository via dependencies

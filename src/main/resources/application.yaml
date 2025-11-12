@@ -5,6 +5,7 @@ ktor:
       - com.example.Service1
     modules:
       - com.example.ApplicationKt.module
+      - com.example.ApplicationKt.module2
   deployment:
     port: 8080
 jwt:
